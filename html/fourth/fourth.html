@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="format-detection" content="telephone=no">
+		<title>课程表--我的</title>
+		<link rel="stylesheet" href="../../plugin/seedsui/seedsui.min.css">
+		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<script type="text/javascript" src="../../js/mui.min.js" ></script>
+		<script type="text/javascript" src="../../plugin/jquery/jquery.min.js" ></script>
+		<style>
+			.userinfo {
+				background-color: black;
+				padding:40px 0;
+			}
+			.userinfo  .niu-gexing{color: white;white-space:nowrap; text-overflow:ellipsis; overflow:hidden;width: 90%;margin: 0 auto;}
+			.userinfo:before {
+				background-image: url(../../img/mebg.jpg);
+				opacity: 0.9;
+			}
+			
+			.userinfo .photoname {
+				margin-top: 10px;
+				display: block;
+				color: white;
+			}
+			
+			.list .justify-content {
+				padding-top: 15px;
+				padding-bottom: 15px;
+			}
+			.niu-fourth-list-font{
+				font-size: 14px;
+				color: #666666;
+			}
+			.mui-content .mui-table-view:first-child{
+				margin-top: 1px;
+			}
+			
+		</style>
+	</head>
+	<body ontouchstart="">
+		<article style="background-color:white;">
+			<div style="border-bottom:1px solid #ddd;">
+				<div class="userinfo before-filter-blur">
+					<span class="photo radiusround size80" style="border:2px solid white;background-image:url(../../img/me.jpg);margin-left:10px;"></span>
+					<span class="photoname" id="niu-name" style="position: absolute;top: 38px;left: 100px;">张遇</span>
+					<div class="text-center padding8">
+						<button id="niu-sno" style="width:120px;height:26px;line-height:15px;position: absolute;bottom:85px;left:95px;" class="button radius40 outline white noclick">201370034404</button>
+					</div>
+					<p class="niu-gexing" id="niu-gexingqianming">-</p>
+				</div>
+			</div>
+		<!--列表-->
+			<div class="mui-content">
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" href="../fourth/fourthOther/personInfo.html">
+							<i class="icon icon-user-fill color-1"></i>
+							<span class="niu-fourth-list-font">个人信息</span>
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" href="../fourth/fourthOther/card.html">
+							<i class="icon icon-cbo-fill color-2"></i>
+							<span class="niu-fourth-list-font">校园卡</span>
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" href="../fourth/fourthOther/score.html">
+							<i class="icon icon-write-fill color-5"></i>
+							<span class="niu-fourth-list-font">成绩</span>
+						</a>
+					</li>
+				</ul>
+				<ul class="mui-table-view mui-table-view-chevron" style="margin-top: 10px;">
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" href="../fourth/fourthOther/feedBack.html">
+							<i class="icon icon-chatline-fill color-4"></i>
+							<span class="niu-fourth-list-font">反馈</span>
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" href="">
+							<i class="icon icon-trash color-6"></i>
+							<span class="niu-fourth-list-font">清除缓存</span>
+						</a>
+					</li>
+				</ul>
+				<ul class="mui-table-view mui-table-view-chevron"style="margin-top: 10px;">
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" href="../fourth/fourthOther/problem.html">
+							<i class="icon icon-link color-9"></i>
+							<span class="niu-fourth-list-font">常见问题</span>
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" href="../fourth/static/tuijian.html">
+							<i class="icon icon-appbag color-5"></i>
+							<span class="niu-fourth-list-font">推荐</span>
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" href="../fourth/static/about.html">
+							<i class="icon icon-persons color-8"></i>
+							<span class="niu-fourth-list-font">关于我们</span>
+						</a>
+					</li>
+					
+				</ul>
+				<div style="height:12px;background-color:#f4f4f4"></div>
+			  	<a class="radius4 button block cancel margin8" onclick="tuichu()">退出登录</a>
+				<div style="height:60px;background-color:#f4f4f4"></div>
+			</div>
+		</article>
+		
+		<footer id="dibu">
+			<ul class="menubar">
+				<li class="tab">
+					<i class="icon icon-home-fill"></i>
+					<label class="tab-label">首页</label>
+				</li>
+				<li class="tab ">
+					<i class="icon icon-paperplane-fill"></i>
+					<label class="tab-label" onclick="">消息</label>
+				</li>
+				<li class="tab">
+					<i class="icon icon-typetext-fill"></i>
+					<label class="tab-label">课程表</label>
+				</li>
+				<li class="tab active">
+					<i class="icon icon-person-fill"></i>
+					<label class="tab-label">我的</label>
+				</li>
+			</ul>
+		</footer>
+		
+		
+		<script type="text/javascript">
+		
+			InitPersonInfo();
+		
+			$(".app-userMenuList li").click(function(){
+				switch($(this).index()){
+					case 0:
+						location.href="../fourth/fourthOther/personInfo.html";
+					break;
+					case 1:
+						location.href="../fourth/fourthOther/card.html";
+					break;
+					case 2:
+						location.href="../fourth/fourthOther/score.html";
+					break;
+					case 3:
+						location.href="../fourth/fourthOther/feedBack.html";
+					break;
+					case 4:
+						
+					break;
+					case 5:
+						location.href="../fourth/fourthOther/problem.html";
+					break;
+					case 6:
+						location.href="../fourth/static/about.html";
+					break;
+				}
+			});
+			
+			//底部导航
+			$("#dibu li").on("click",function(){
+				switch($(this).index()){
+					case 0:
+						location.href="../first/first.html";
+					break;
+					case 1:
+						location.href="../second/second.html";
+					break;
+					case 2:
+						location.href="../third/third.html";
+					break;
+				}
+			});
+			
+			
+			function InitPersonInfo(){
+				var person=JSON.parse(localStorage.getItem("person"));
+				$("#niu-name").html(person[1]);
+				$("#niu-sno").html(person[0]);
+				console.log(person);
+				
+				if(person[15]==null || person[15]==""){
+					$("#niu-gexingqianming").html("快来设置自己的个性签名吧！");
+				}else{
+					$("#niu-gexingqianming").html(person[15]);
+				}
+			}
+			
+			function tuichu(){
+				 localStorage.removeItem("achieve");
+				 localStorage.removeItem("course");
+				 localStorage.removeItem("iputmoney");
+				 localStorage.removeItem("message");
+				 localStorage.removeItem("person");
+				 localStorage.removeItem("ps");
+				 localStorage.removeItem("us");
+				 localStorage.removeItem("userid");
+				 location.href="../login/login.html";
+				
+			}
+		</script>
+	</body>
+</html>

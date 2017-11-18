@@ -1,0 +1,165 @@
+*{
+	padding: 0px;
+}
+
+.niu-font{
+	font-family: "微软雅黑";
+	font-size: 14px;
+	color: #555555;
+}
+
+
+.niu-margin-top{
+	margin-top: 30px;
+}
+.niu-margin-right{
+	margin-right: 10px;
+}
+.niu-margin-top-2{
+	margin-top: 60px;
+}
+.niu-margin-top-3{
+	margin-top: 50px;
+}
+.niu-bg-wirte{
+	color: #FFFFFF;
+	padding-top: 5px;
+	font-size: 16px;
+}
+/*.niu-bg-wirte:link{
+	color: #1693CE;
+}*/
+
+.niu-xiaoshou{
+	cursor:pointer;
+}
+.niu-font{
+	font-size: 15px;
+	color: #515151;
+}
+.top {
+	width: 100%;
+	background: #53C6FD;
+	padding: 50px 0px 10px 0px;
+	text-align: center;
+}
+
+img {
+	width: 100px;
+	height: 100px;
+}
+.footers {
+	position: absolute;
+	bottom:20px;
+	width: 100%;
+	height:auto;
+}
+
+.footers p {
+	margin: 10px 0px;
+	text-align: center;
+	color: #CFCFCF;
+}
+
+.con {
+	width: 140px;
+	padding: 10px 15px;
+	margin: 0 auto;
+}
+
+.phone,
+.register {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	float: left;
+	margin: 5px 10px;
+}
+
+.phone .icon-phone {
+	margin-top: 10px;
+}
+
+.register .icon-person {
+	margin-top: 10px;
+}
+
+.grid.grid-bordered li {
+	border-style: none;
+}
+
+.grid.grid-bordered {
+	border: 0px;
+}
+.button{margin-right: 10px;padding: 0px 5px;border-radius: 5px;}
+
+
+/*跳转*/
+.niu-go-img{
+	width: 100%;
+	height: 100%;
+	position: relative;
+	left: 0px;
+	top: 0px;
+}
+
+.niu-go-font{
+	font-size: 16px;
+	color: #FFFFFF;
+	font-family: "微软雅黑";
+}
+.niu-float-right{
+	position: absolute;
+	right: 15px;
+	top: 30px;
+}
+
+
+
+/*首页新闻*/
+.niu-news-bg-bule{
+	background-color: #18B2ED;
+}
+.niu-news-bg-bule h1{
+	font: "微软雅黑";
+	color: #FFFFFF;
+}
+
+.niu-card{
+	box-shadow:none;
+	padding-top: 10px;
+}
+.niu-news-link{
+	padding: 0px;
+	margin-left: -12px;
+}
+.niu-panding-left{
+	padding-left: 5px;
+}
+
+
+/*底部*/
+.niu-bar{
+	width: 100%;
+	height: 50px;
+	background-color: #000000;
+	
+	position: fixed;	
+	right: 0px;
+	left: 0px;
+	z-index: 1;
+}
+
+/*消息*/
+
+.niu-xiaoxi-xiaoyuan-font{
+	color: #18B2ED;
+}
+.niu-xiaoxi-xiaoyuan-a{
+	font-size: 14px;
+	color: #8F8F94;
+}
+/*我的*/
+/*个人信息*/
+
+

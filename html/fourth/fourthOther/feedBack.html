@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="format-detection" content="telephone=no">
+		<title>校园课程表--反馈</title>
+		<link rel="stylesheet" href="../../../plugin/seedsui/seedsui.min.css">
+		<link rel="stylesheet" href="../../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../../css/myStyle.css" />
+		<script type="text/javascript" src="../../../js/mui.min.js" ></script>
+		<script type="text/javascript" src="../../../js/jquery.min.js" ></script>
+		<script type="text/javascript" src="../../../js/jsoup.js" ></script>
+		<script type="text/javascript" src="../../../js/check.js" ></script>
+		<style>
+			.inputbox-left {
+				width: 18%;
+			}
+			
+			.app-listcard {}
+			
+			.app-listcardTitle {
+				display: -webkit-box;
+				-webkit-box-align: center;
+				border-style: solid;
+				border-width: 0 0 1px 0;
+				border-color: #e6e6e6;
+				padding: 0 0 0 8px;
+			}
+			
+			.app-listcardTitleContent {
+				-webkit-box-flex: 1;
+				padding: 8px;
+			}
+			
+			.app-listcardTitleContent small {
+				display: block;
+				margin-top: 6px;
+			}
+			
+			.app-listcardContent {
+				padding: 8px;
+			}
+			
+			.card-info .icon .card-handler .icon {
+				font-size: 20px;
+				width: 20px;
+				height: 20px;
+				color: #aaa;
+			}
+			.photo img {
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+			}
+		</style>
+	</head>
+
+	<body >
+		<header>
+			<div class="titlebar reverse">
+				<a class="titlebar-button" href="javascript:history.go(-1)">
+					<i class="icon icon-arrowleft"></i>
+				</a>
+				<h1>反馈</h1>
+				<a class="titlebar-button button radius40 lrpadding8">取消</a>
+				<a class="titlebar-button" >
+					<button class="button radius4 warn" style="height:32px;line-height:32px;padding:0 8px;" onclick="fabuba()">发布</button>
+				</a>
+			</div>
+		</header>
+		<article>
+			<div class="inputbox radius4 margin8">
+				<textarea id="niu-problem" class="countvalue input-textarea" data-maxlength="10" placeholder="请输入反馈信息"></textarea>
+				<p class="absolute" style="bottom: 10px;right:10px;"></p>
+			</div>
+		</article>
+		
+		<script type="text/javascript">
+			function fabuba(){
+				
+				var info = new echoSlide();
+				var check = new validationInformation();
+				var ip=info.getIpAddress();
+				
+				var k=check.checkProblem($("#niu-problem"));
+				if(k)
+				{
+					var myurl = "http://"+ip+":8080/SecondApp/ProblemServer";
+					var myDate={id:JSON.parse(localStorage.getItem("userid")),content:$("#niu-problem").val()};
+					info.getProblem(myurl,myDate);
+					$("#niu-problem").val("");
+				}else{
+					mui.toast('格式不正确',{duration:'short', type:'div'});
+				}
+			}
+		</script>
+	</body>
+</html>

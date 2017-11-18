@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="format-detection" content="telephone=no">
+		<title>校园课程表--我的校园卡</title>
+		<link rel="stylesheet" href="../../../plugin/seedsui/seedsui.min.css">
+		<link rel="stylesheet" href="../../../css/style.css" />
+		<link rel="stylesheet" href="../../../css/mui.min.css" />
+		<script type="text/javascript" src="../../../js/mui.min.js" ></script>
+		<script type="text/javascript" src="../../../plugin/jquery/jquery.min.js" ></script>
+		<script type="text/javascript" src="../../../js/jsoup.js" ></script>
+		<style>
+			.inputbox-left {
+				width: 18%;
+			}
+			p{margin-bottom: 10px;}
+			.photo.bordered {
+				color: #666;
+				background-color: white;
+			}
+			.userinfo {
+				text-align: center;
+				background-color: black;
+				padding: 40px 0;
+			}
+			
+			.userinfo:before {
+				background-image: url(../../../img/photo.png);
+				opacity: 0.9;
+			}
+			
+			.userinfo .photoname {
+				margin-top: 10px;
+				display: block;
+				color: white;
+			}
+			
+			.list .justify-content {
+				padding-top: 15px;
+				padding-bottom: 15px;
+			}
+		</style>
+		</style>
+	</head>
+
+	<body ontouchstart="">
+		<header>
+			<div class="titlebar reverse">
+				<h1 class="text-center" style="margin-left: 40px;">校园卡</h1>
+				<span style="margin-right: 30px; font-size: 14px;color: #FFFFFF;">
+					 <span class="mui-icon mui-icon-loop" data-loading-text=" " data-loading-icon-position="right"></span>
+				</span>
+			</div>
+		</header>
+		<article style="background:white;">
+			<div style="padding: 15px 0px;">
+				<div style="width:85%;background:#FFAE02;border-radius:10px;height:190px;margin:0 auto;">
+					<div style="width: 95%;margin: 0 auto;">
+						<img src="../../../img/1.png" style="width:50px;height:50px;margin:10px;border-radius: 10px;" />
+						<div style="width: 60%;float: right;height:60px;line-height: 60px;color: white;">
+							<span class="icon icon-person-fill"></span>&nbsp;&nbsp;<span id="niu-money-sno">201370034404</span>
+						</div>
+					</div>
+					<div style="width:100%;height:70px;margin: 0 auto;text-align: center;line-height: 70px;">
+						<p style="color: white;font-family: '微软雅黑';"><span style="font-size: 16px;">￥</span><span style="font-size: 30px;" id="niu-money">9.00</span></p>
+					</div>
+					<div style="width: 100%;height:50px;background:#FF6F36;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
+						<span style="color: #FFFFFF;float: right;margin: 10px 20px 0px 0px; font-size: 14px;" id="niu-money-buzhu">补助：￥9.00</span>
+					</div>
+				</div>
+			</div>
+		</article>
+
+		<article style="background-color:white;margin-top: 10px;">
+			<div style="border-top:1px solid #ddd;">
+				<ul class="list app-userMenuList">
+					<li class="one">
+						<i class="icon icon-fileadd-fill color-6"></i>
+						<div>
+							<p style="margin-top: 10px;">消费记录</p>
+							<i class="icon icon-arrowright"></i>
+						</div>
+					</li>
+					<li class="two">
+						<i class="icon icon-rdorem-fill color-1"></i>
+						<div>
+							<p style="margin-top: 10px;">充值记录</p>
+							<i class="icon icon-arrowright"></i>
+						</div>
+					</li>
+					<li class="three">
+						<i class="icon icon-rdoquestion color-9"></i>
+						<div>
+							<p style="margin-top: 10px;">常见问题</p>
+							<i class="icon icon-arrowright"></i>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</article>
+		<script>
+			var info = new echoSlide();
+			var ip=info.getIpAddress();
+			
+			initCard();
+			//刷新
+			mui(document.body).on('tap', '.mui-icon', function(e) {
+           		mui(this).button('loading');
+           		$(this).removeClass("mui-icon mui-icon-loop");
+            	setTimeout(function() {
+               		 mui(this).button('reset');
+               		 $(this).addClass("mui-icon mui-icon-loop");
+               		 
+               		 //通知和校园卡
+					var myurl = "http://"+ip+":8080/SecondApp/OtherInfoServer";
+					var myDate={username:JSON.parse(localStorage.getItem("us")),password:JSON.parse(localStorage.getItem("ps")),id:JSON.parse(localStorage.getItem("userid"))};
+					info.tongzhi(myurl,myDate);
+               		initCard();
+               		mui.toast('已经是最新数据',{duration:'short', type:'div'});
+            	}.bind(this), 1500);
+        	});
+////		
+			$(".app-userMenuList .one").on("click", function() {
+				location.href = "../fourthOther/card/trade.html";
+			});
+			$(".app-userMenuList .two").on("click", function() {
+				location.href = "../fourthOther/card/trade2.html";
+			});
+			$(".app-userMenuList .three").on("click", function() {
+				location.href = "../fourthOther/card/problem.html";
+			});
+			
+			
+			
+			
+			function initCard(){
+				var mess=JSON.parse(localStorage.getItem("message"));
+				$("#niu-money-sno").html(mess[0]);
+				$("#niu-money").html(mess[1]);
+				$("#niu-money-buzhu").html("补助：￥"+mess[2]);
+				
+			}
+			
+			
+		</script>
+	</body>
+
+</html>

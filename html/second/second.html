@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="format-detection" content="telephone=no">
+		<title>校园课程表--班级消息</title>
+		<link rel="stylesheet" href="../../plugin/seedsui/seedsui.min.css">
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/myStyle.css" />
+		<script type="text/javascript" src="../../js/mui.min.js" ></script>
+		<script type="text/javascript" src="../../plugin/jquery/jquery.min.js" ></script>
+		<script type="text/javascript" src="../../js/jsoup.js" ></script>
+		<style type="text/css">
+			.app-listcardTitle {
+				display: -webkit-box;
+				-webkit-box-align: center;
+				border-style: solid;
+				border-width: 0 0 1px 0;
+				border-color: #e6e6e6;
+				padding: 0 0 0 8px;
+			}
+			
+			.app-listcardTitleContent {
+				-webkit-box-flex: 1;
+				padding: 8px;
+			}
+			
+			.app-listcardTitleContent small {
+				display: block;
+				margin-top: 6px;
+			}
+			
+			.app-listcardContent {
+				padding: 8px;
+			}
+			
+			.card-info .icon,
+			.card-handler .icon {
+				font-size: 20px;
+				width: 20px;
+				height: 20px;
+				color: #aaa;
+			}
+			
+			.app-listContact1 li {
+				position: relative;
+				display: -webkit-box;
+				box-sizing: border-box;
+				-webkit-box-align: center;
+				background-color: white;
+				margin-top: 10px;
+			}
+			
+			.app-listContact1 li .photo {
+				margin: 0 8px;
+				border-radius: 100%;
+			}
+			
+			.app-listContactContent {
+				-webkit-box-flex: 1.0;
+				padding: 8px 8px 8px 0;
+				border-style: solid;
+				border-width: 0 0 1px 0;
+				border-color: #e6e6e6;
+			}
+			.app-listContact1 li .photo{width:36px;height:36px;position: relative;margin-bottom:50px;}
+			.app-listContact1 li .app-listContactContent .con{margin-top:10px;}
+			.app-listContact1 li .app-listContactContent .absolute{top:12px;right:4px;}
+			.app-listContact1 li .app-listContactContent .block{margin-top:2px;}
+		</style>
+		
+	</head>
+	<body>
+		<header>
+			<div class="bg-primary tbpadding8">
+				<ul class="tabbar reverse" data-type="rect" id="ID-Tabbar" style="width:50%;">
+					<li class="tab active">
+						<label class="tab-label">通知</label>
+					</li>
+					<li class="tab">
+						<label class="tab-label">校园</label>
+					</li>
+				</ul>
+				<span style="margin-top: -30px;margin-right:20px;font-size: 14px;color: #FFFFFF;float: right;">
+				 	<span class="mui-icon mui-icon-loop" data-loading-text=" " data-loading-icon-position="right"></span>
+				</span>
+			</div>
+		</header>
+		
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper niu-margin-top-2" >
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<ul class="mui-table-view mui-table-view-chevron">
+					<div class="group">
+						<div class="app-listcardTitle">
+							<div class="photo bg-default radiusround bg-4">
+								<i class="icon icon-filesearch"></i>
+							</div>
+						<div class="app-listcardTitleContent">
+							<p class="color-warn">课程</p>
+							<small>[中原工学院]</small>
+						</div>
+					</div>
+					<div class="app-listcardContent">
+						<p style="text-indent: 2em;line-height: 24px;letter-spacing: 2px;color: #515151;font-size: 16px;" id="niuCourse">
+							明天无课程安排
+						</p>
+					</div>
+				</ul>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<div class="group">
+						<div class="app-listcardTitle">
+							<div class="photo bg-default radiusround bg-4">
+								<i class="icon icon-contact"></i>
+							</div>
+						<div class="app-listcardTitleContent">
+							<p class="color-warn">图书</p>
+							<small>[中原工学院]</small>
+						</div>
+					</div>
+					<div class="app-listcardContent">
+						<p style="text-indent: 2em;line-height: 24px;letter-spacing: 2px;color: #515151;font-size: 16px;" id="niuBooks">
+							你目前借阅0册图书
+						</p>
+					</div>
+				</ul>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<div class="group">
+						<div class="app-listcardTitle">
+							<div class="photo bg-default radiusround bg-4">
+								<i class="icon icon-rdorem"></i>
+							</div>
+						<div class="app-listcardTitleContent">
+							<p class="color-warn">学费</p>
+							<small>[中原工学院]</small>
+						</div>
+					</div>
+					<div class="app-listcardContent">
+						<p style="text-indent: 2em;line-height: 24px;letter-spacing: 2px;color: #515151;font-size: 16px;" id="niuSpeed">
+							目前暂时无欠费信息
+						</p>
+					</div>
+				</ul>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<div class="group">
+						<div class="app-listcardTitle">
+							<div class="photo bg-default radiusround bg-4">
+								<i class="icon icon-shop"></i>
+							</div>
+						<div class="app-listcardTitleContent">
+							<p class="color-warn">一卡通</p>
+							<small>[中原工学院]</small>
+						</div>
+					</div>
+					<div class="app-listcardContent">
+						<p style="text-indent: 2em;line-height: 24px;letter-spacing: 2px;color: #515151;font-size: 16px;" id="niuTry">
+							目前暂时无异常信息
+						</p>
+					</div>
+				</ul>
+			</div>
+		</div>
+		<div class="mui-content niu-margin-top-2" id="CarouselPag2">
+			<div class="mui-card">
+				<div class="mui-card-header ">
+					<span class="niu-xiaoxi-xiaoyuan-font">系统 提示</span>
+				</div>
+				<div class="mui-card-content">
+					<div class="mui-card-content-inner">
+						还没有消息,刷新试试
+					</div>
+				</div>
+				<div class="mui-card-footer">2017-4-1
+					<a class="niu-xiaoxi-xiaoyuan-a"><<&nbsp;温馨提示&nbsp;>></a>
+				</div>
+			</div>
+		</div>
+		
+		
+		<footer id="dibu">
+			<ul class="menubar">
+				<li class="tab">
+					<i class="icon icon-home-fill"></i>
+					<label class="tab-label">首页</label>
+				</li>
+				<li class="tab active">
+					<i class="icon icon-paperplane-fill"></i>
+					<label class="tab-label" onclick="">消息</label>
+				</li>
+				<li class="tab">
+					<i class="icon icon-typetext-fill"></i>
+					<label class="tab-label">课程表</label>
+				</li>
+				<li class="tab">
+					<i class="icon icon-person-fill"></i>
+					<label class="tab-label">我的</label>
+				</li>
+			</ul>
+		</footer>
+		
+		<script>
+			InitOtherInfo();
+			var info = new echoSlide();
+			
+			$("#CarouselPag2").hide();
+			info.InitxiaoyuanMessage($("#CarouselPag2"));
+			var ip=info.getIpAddress();
+			
+			
+			//设置刷新
+			mui(document.body).on('tap', '.mui-icon', function(e) {
+           		mui(this).button('loading');
+           		$(this).removeClass("mui-icon mui-icon-loop");
+            	setTimeout(function() {
+               		 mui(this).button('reset');
+               		 $(this).addClass("mui-icon mui-icon-loop");
+               		 
+               		 InitOtherInfo();//通知内容
+               		 
+               		 info.InitxiaoyuanMessage($("#CarouselPag2"));//校园
+               		 mui.toast('已经是最新数据',{duration:'short', type:'div'});
+            	}.bind(this), 5000);
+            	
+            	//初始化通知
+            	var myurl = "http://"+ip+":8080/SecondApp/CourseServer";
+            	
+            	var myurl = "http://"+ip+":8080/SecondApp/OtherInfoServer";
+				var myDate={username:JSON.parse(localStorage.getItem("us")),password:JSON.parse(localStorage.getItem("ps")),id:JSON.parse(localStorage.getItem("userid"))};
+				info.tongzhi(myurl,myDate);
+				
+				//初始化校园 通知
+				var myurl = "http://"+ip+":8080/SecondApp/XiaoyuanServer";
+				info.getCamput(myurl);
+				
+        	});
+        	
+        	
+//			function pulldownRefresh() {
+//				setTimeout(function() {
+//					InitOtherInfo();//初始化
+//					mui.toast('已经是最新数据',{duration:'short', type:'div'});
+//					
+//					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+//				}, 1500);
+//				//通知和校园卡
+//				var myurl = "http://"+ip+":8080/SecondApp/OtherInfoServer";
+//				var myDate={username:JSON.parse(localStorage.getItem("us")),password:JSON.parse(localStorage.getItem("ps")),id:JSON.parse(localStorage.getItem("userid"))};
+//				info.tongzhi(myurl,myDate);
+//			}
+			
+			
+			//顶部导航
+			$("#ID-Tabbar li").on("click",function(){
+				
+				$(this).addClass("active");
+				$(this).siblings().removeClass("active");
+				
+				if($(this).index()==0){
+					$("#pullrefresh").show();
+					$("#CarouselPag2").hide();
+				}else{
+					$("#pullrefresh").hide();
+					$("#CarouselPag2").show();
+				}
+			});
+			
+			//底部导航
+			$("#dibu li").on("click",function(){
+				switch($(this).index()){
+					case 0:
+						location.href="../first/first.html";
+					break;
+					case 2:
+						location.href="../third/third.html";
+					break;
+					case 3:
+						location.href="../fourth/fourth.html";
+					break;
+				}
+			});
+			
+		
+			//一卡通初始化
+			function InitOtherInfo(){
+				$("#niuCourse").html(JSON.parse(localStorage.getItem("message"))[4]);
+				$("#niuBooks").html(JSON.parse(localStorage.getItem("message"))[6]);
+				$("#niuSpeed").html(JSON.parse(localStorage.getItem("message"))[3]);
+				$("#niuTry").html(JSON.parse(localStorage.getItem("message"))[5]);
+			}
+			
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="format-detection" content="telephone=no">
+		<title>校园课程表--登录</title>
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../plugin/seedsui/seedsui.min.css">
+		<link rel="stylesheet" href="../../css/myStyle.css" />
+		<script type="text/javascript" src="../../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		
+		<script type="text/javascript" src="../../js/otherMoth.js" ></script>
+		<script type="text/javascript" src="../../js/check.js" ></script>
+		<script type="text/javascript" src="../../js/jsoup.js" ></script>
+	</head>
+	<body>
+		<div class="top">
+			<img src="../../img/1.png" />
+		</div>	
+		<div id="formLogin">
+			<!--登陆-->
+			<form >
+				<div class="group">
+					<div class="inputbox underline">
+						<label><i class="icon icon-person color-1"></i></label>
+						<div class="inputbox-right inputbox">
+							<input id="niu-username" type="text" class="input-text" placeholder="请输入学号" name="username" />
+						</div>
+					</div>
+					<div class="inputbox underline">
+						<label><i class="icon icon-lock2 color-1"></i></label>
+						<div class="inputbox-right inputbox">
+							<input id="niu-password" type="password" class="input-text" placeholder="请输入密码" name="password" />
+						</div>
+					</div>
+				</div>
+				<a class="radius4 button block submit margin8">
+					<label>登录</label>
+				</a>
+			</form>
+			<!--手机登录-->
+			<form>
+				<div class="group">
+					<div class="inputbox underline">
+						<label><i class="icon icon-phone color-1"></i></label>
+						<div class="inputbox-right inputbox">
+							<input id="niuphone" type="text" class="input-text" placeholder="请输入手机号">
+						</div>
+						<input type="button" class="button" value="发送验证码"/>
+					</div>
+					<div class="inputbox underline">
+						<label><i class="icon icon-pattern color-1"></i></label>
+						<div class="inputbox-right inputbox">
+							<input type="text" class="input-text" placeholder="请输入验证码" id="niuYanzhengma">
+						</div>
+					</div>
+				</div>
+				<a  class="radius4 button block submit margin8">
+					<label>一键登录</label>
+				</a>
+			</form>
+			<!--注册-->
+			<form >
+				<div class="group">
+					<div class="inputbox underline">
+						<label><i class="icon icon-person color-1"></i></label>
+						<div class="inputbox-right inputbox">
+							<input id="zhuceusername" type="text" class="input-text" placeholder="请输入学号" name="username" />
+						</div>
+					</div>
+					<div class="inputbox underline">
+						<label><i class="icon icon-lock2 color-1"></i></label>
+						<div class="inputbox-right inputbox">
+							<input id="zhucepassword" type="password" class="input-text" placeholder="请输入密码" name="password" />
+						</div>
+					</div>
+				</div>
+				<a class="radius4 button block cancel margin8">
+					<label>注册</label>
+				</a>
+			</form>
+		</div>
+		<div class="footers">
+			<p>————更换登录方式————</p>
+			<ul class="grid grid-bordered" data-col="3" data-rowspace="8" id="changeLogin">
+				<li>
+					<a  class="size54 bordered radiusround color-label bg-1">
+						<i class="icon icon-persons size30 color-white"></i>
+					</a>
+					<label>学号登录</label>
+				</li>
+				<li>
+					<a  class="size54 bordered radiusround color-label bg-5">
+						<i class="icon icon-phone-fill size30 color-white"></i>
+					</a>
+					<label>手机登录</label>
+				</li>
+				<li>
+					<a  class="size54 bordered radiusround color-label bg-4">
+						<i class="icon icon-write-fill size30 color-white"></i>
+					</a>
+					<label>注册</label>
+				</li>
+			</ul>
+		</div>
+
+		<script type="text/javascript">
+			var info = new echoSlide();
+			var timeOut=new otherMethod();
+			var check = new validationInformation();
+			
+			var ip=info.getIpAddress();
+			
+//			try{
+				changeLoginMode();//改变登录方式
+				timeDelay()//按钮延迟操作
+				
+				if(timeOut.yanzhengInfo()){
+					location.href="../first/first.html";
+				}
+				//
+//			}catch(e){
+//				mui.toast('系统异常',{duration:'short', type:'div'});
+//			}
+			
+			
+			//改变登录方式
+			function changeLoginMode(){
+				//初始化
+				$("#formLogin form").hide();
+				$("#formLogin form").eq(0).show();
+				$("#changeLogin li a").click(function(){
+					var a=$(this).parent().index();
+					$("#formLogin form").eq(a).show();
+					$("#formLogin form").eq(a).siblings().hide();
+				});
+			}
+			
+			//登录，注册，获取验证码
+			function timeDelay(){
+				//登录
+				$("#formLogin form a").eq(0).click(function(){
+					try{
+						var usname=check.checkUserName($("#niu-username"));
+						var psword=check.checkPassword($("#niu-password"));
+						if(usname && psword){
+							
+							if(timeOut.yanzhengInfo()){
+								var us=localStorage.getItem("us").replace(/\"/g, "");
+								var ps=localStorage.getItem("ps").replace(/\"/g, "");
+								var usa=$("#niu-username").val();
+								var psa=$("#niu-password").val();
+								
+								if(us==usa && ps==psa){
+									location.href="go.html";
+								}else{
+									mui.toast('天空飘过几颗星',{duration:'short', type:'div'});
+								}
+							}else{
+								mui.toast('你还木有注册!',{duration:'short', type:'div'});
+							}
+						}else{
+							mui.toast('请核对信息',{duration:'short', type:'div'});
+						}
+					}catch(e){
+						mui.toast('网路神游中...',{duration:'short', type:'div'});
+					}
+//					timeOut.timeOutButton($(this),30,"登录");
+				});
+				//手机登录
+				$("#formLogin form a").eq(1).click(function(){
+					
+					var phone=localStorage.getItem("phone");
+					if(phone==$("#niuYanzhengma").val()){
+						localStorage.removeItem("phone");
+						location.href="go.html";
+					}else{
+						mui.toast('请检查验证码',{duration:'short', type:'div'});
+					}
+				});
+				
+				//验证码
+				$("#formLogin form:eq(1) input:eq(1)").click(function(){
+					try{
+						var phone=check.checkMovePhone($("#niuphone"));
+						if(phone){
+							timeOut.timeOutInput($(this),30,"发送验证码");
+							var myurl = "http://"+ip+":8080/SecondApp/MessageServer";
+							info.phoneZhuceInfo(myurl,$("#niuphone"));
+						}else{
+							mui.toast('手机号不正确',{duration:'short', type:'div'});
+						}
+					}catch(e){
+						mui.toast('网路神游中...',{duration:'short', type:'div'});
+					}
+				});
+				
+				try{
+					//注册
+					$("#formLogin form a").eq(2).click(function(){
+						if(!$(this).hasClass("disable")){
+							var usname=check.checkUserName($("#zhuceusername"));
+							var psword=check.checkPassword($("#zhucepassword"));
+							if(usname && psword){
+								getZhuCeInfo();//得到其他数据
+								timeOut.timeOutButtonZhuce($(this),30,"注册");
+								
+								
+								setTimeout(function(){
+									if(timeOut.yanzhengInfo()){
+										mui.toast('注册成功',{duration:'short', type:'div'});
+									}else{
+										mui.toast('你的网路太不给力了',{duration:'short', type:'div'});
+									}
+								},30000);
+							}
+						}else{
+							mui.toast('天空飘过几片云',{duration:'short', type:'div'});
+						}
+					});
+				}catch(e){
+					mui.toast('注册，再试一次吧!',{duration:'short', type:'div'});
+				}
+			}
+			
+			function getZhuCeInfo(){
+				
+				var myurl = "http://"+ip+":8080/SecondApp/RegisterServer";
+				info.zhuceInfo(myurl, $("#zhuceusername").val(),$("#zhucepassword").val());
+				
+				info.xinwen();//新闻初始化
+				
+				setTimeout(function(){
+					if(localStorage.getItem("message")==null){
+						//通知和校园卡
+						var myurl = "http://"+ip+":8080/SecondApp/OtherInfoServer";
+						var myDate={username:JSON.parse(localStorage.getItem("us")),password:JSON.parse(localStorage.getItem("ps")),id:JSON.parse(localStorage.getItem("userid"))};
+						info.tongzhi(myurl,myDate);
+					}
+					
+					if(localStorage.getItem("person")==null){
+						//个人信息初始化
+						var myurl = "http://"+ip+":8080/SecondApp/PersonInfoServer";
+						var myDate={username:JSON.parse(localStorage.getItem("us")),password:JSON.parse(localStorage.getItem("ps")),id:JSON.parse(localStorage.getItem("userid"))};
+						info.InitPersonInfo(myurl,myDate);
+					}
+					
+					if(localStorage.getItem("course")==null){
+						//课程表初始化
+						var myurl = "http://"+ip+":8080/SecondApp/CourseServer";
+						var myDate={username:JSON.parse(localStorage.getItem("us")),password:JSON.parse(localStorage.getItem("ps")),id:JSON.parse(localStorage.getItem("userid"))};
+						info.getCourseInfo(myurl,myDate);
+					}
+					
+					if(localStorage.getItem("xiaoyaun")==null){
+						//校园
+						var myurl = "http://"+ip+":8080/SecondApp/XiaoyuanServer";
+						info.getCamput(myurl);
+					}
+					
+					if(localStorage.getItem("achieve")==null){
+						//成绩初始化
+						var myurl = "http://"+ip+":8080/SecondApp/AchievermentServer";
+						var myDate={username:JSON.parse(localStorage.getItem("us")),password:JSON.parse(localStorage.getItem("ps")),id:JSON.parse(localStorage.getItem("userid"))};
+						info.InitAchieve(myurl,myDate);
+					}
+					//http://120.24.65.113:8080/SecondApp/InputMoneyServer?userid=17&username=201370034237&password=15003907891&id=17&callback
+					if(localStorage.getItem("iputmoney")==null){
+						var myurl = "http://"+ip+":8080/SecondApp/InputMoneyServer";
+						var myDate={username:JSON.parse(localStorage.getItem("us")),password:JSON.parse(localStorage.getItem("ps")),id:JSON.parse(localStorage.getItem("userid"))};
+						info.InitIputMoney(myurl,myDate);
+					}
+				},3000);
+			}
+			
+			
+		</script>
+	</body>
+</html>

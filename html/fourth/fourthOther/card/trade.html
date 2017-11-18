@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="format-detection" content="telephone=no">
+		<title>校园课程表--校园卡消费记录</title>
+		<link rel="stylesheet" href="../../../../plugin/seedsui/seedsui.min.css">
+		<link rel="stylesheet" href="../../../../css/mui.min.css" />
+	    <script type="text/javascript" src="../../../../js/mui.min.js" ></script>
+		<script type="text/javascript" src="../../../../plugin/jquery/jquery.min.js" ></script>
+		<script type="text/javascript" src="../../../../js/jsoup.js" ></script>
+		
+		<style>
+			.underline{padding:5px;}
+		    .bold{color:#666666;}
+			.absolute{top:10px;right:8px;font-size:18px;}
+			.ds{padding: 5px 0px;color: #CFCFCF;}
+			.money{font-size: 8px;color: #AAAAAA;margin-top:22px;}
+			.niu-margin-right{
+				float: right;
+				margin-left: 30px;
+			}
+		</style>
+	</head>
+
+	<body ontouchstart="">
+		<header>
+			<div class="titlebar reverse">
+				<a class="titlebar-button button size32  left" href="javascript:history.go(-1)">
+					<i class="icon icon-arrowleft size20"></i>
+				</a>
+				<h1 class="text-center">消费记录</h1>
+			</div>
+		</header>
+
+		<article>
+			<div style="height:50px;background-color:#f4f4f4"></div>
+			<!--下拉刷新容器-->
+			<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="margin-top: 50px;">
+				<div class="mui-scroll" >
+					<!--数据列表-->
+					<ul class="list group" >
+						<li class="underline">
+							<div class="justify-content">
+								<p class="bold">餐费支出(POS5#)</p>
+								<big class="absolute color-9">-10.00</big>
+								<p class="ds"><span>2017-03-03</span></p>
+								<span class="absolute money">余額：10000:00</span>
+							</div>
+						</li>
+						<li class="underline">
+							<div class="justify-content">
+								<p class="bold">餐费支出(POS5#)</p>
+								<big class="absolute color-9">-10.00</big>
+								<p class="ds">2017-03-03&nbsp;18:15:03</p>
+								<span class="absolute money">余額：10000:00</span>
+							</div>
+						</li>
+						<li class="underline">
+							<div class="justify-content">
+								<p class="bold">餐费支出(POS5#)</p>
+								<big class="absolute color-9">-10.00</big>
+								<p class="ds">2017-03-03&nbsp;18:15:03</p>
+								<span class="absolute money">余額：10000:00</span>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+		</article>
+		
+		<script type="text/javascript">
+			
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					}
+				}
+			});
+			function pulldownRefresh() {
+				setTimeout(function() {
+					mui.toast('维护中...',{duration:'short', type:'div'});
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				}, 1500);
+			}
+		</script>
+		
+	</body>
+
+</html>

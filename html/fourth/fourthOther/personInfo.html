@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="format-detection" content="telephone=no">
+		<title>校园课程表--完善信息</title>
+		<link rel="stylesheet" href="../../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../../css/myStyle.css" />
+		<link rel="stylesheet" href="../../../plugin/seedsui/seedsui.min.css" />
+		<script type="text/javascript" src="../../../plugin/jquery/jquery.min.js" ></script>
+		<script type="text/javascript" src="../../../js/mui.min.js" ></script>
+		<script type="text/javascript" src="../../../js/jsoup.js" ></script>
+		<script type="text/javascript" src="../../../js/check.js" ></script>
+	</head>
+
+	<body>
+		<header>
+			<div class="titlebar reverse">
+				<a class="titlebar-button" href="javascript:history.go(-1)">
+					<i class="icon icon-arrowleft"></i>
+				</a>
+				<h1>信息完善</h1>
+				<div class="right">
+					<div class="titlebar-button button radius40 lrpadding8" onclick="baocun()">保存</div>
+				</div>
+			</div>
+		</header>
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper niu-margin-top-3">
+			<div class="mui-scroll">
+				<!--内容-->
+				<form class="mui-input-group">
+					<div class="mui-input-row">
+						<label class="inputbox-left">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</label>
+						<input class="niu-font" id="niu-names" type="text"  value="张遇" disabled="true"/>
+					</div>
+					<div class="mui-input-row">
+						<label class="inputbox-left">学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号</label>
+						<input class="niu-font" id="niu-sno" type="text"  value="201370034404" disabled="true"/>
+					</div>
+					<div class="mui-input-row">
+						<label class="inputbox-left">专&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业</label>
+						<input class="niu-font" id="niu-zhuanye" type="text" value="金融信息化方向" disabled="true"/>
+					</div>
+					<div class="mui-input-row">
+						<label  class="inputbox-left">手&nbsp;&nbsp;机&nbsp;&nbsp;号</label>
+						<input id="niu-phone" placeholder="手机号" class="niu-font"  type="number" value=""/>
+					</div>
+				</form>
+				<div class="group">
+					<div class="inputbox box-top">
+						<label class="inputbox-left">&nbsp;&nbsp;个性签名</label>
+						<div class="inputbox-right inputbox niu-person-textarea">
+							<textarea id="niu-notes" class="label-right input-textarea " name="note" placeholder="请输入个性签名"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<script>
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					}
+				}
+			});
+			function pulldownRefresh() {
+				setTimeout(function() {
+					initPersonInfo();
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+					mui.toast('更新成功',{duration:'short', type:'div'});
+				}, 1500);
+				
+				var myurl = "http://"+ip+":8080/SecondApp/UpdatePersonInfo";
+				info.InfoAll(myurl,$("#niu-phone"),$("#niu-notes"),JSON.parse(localStorage.getItem("userid")));	
+			}
+			
+			var info = new echoSlide();
+			var check = new validationInformation();
+			var ip=info.getIpAddress();
+			
+			
+			function baocun(){
+				var phone=check.checkMovePhone($("#niu-phone"));
+				var note=check.checkNotes($("#niu-notes"));
+				
+				if(phone && note){
+					var myurl = "http://"+ip+":8080/SecondApp/UpdatePersonInfo";
+					info.InfoAll(myurl,$("#niu-phone"),$("#niu-notes"),JSON.parse(localStorage.getItem("userid")));	
+				}else{
+					mui.toast('填写格式错误',{duration:'short', type:'div'});
+				}
+			}
+			
+			initPersonInfo();
+			function initPersonInfo(){
+				
+				var person=JSON.parse(localStorage.getItem("person"));
+				$("#niu-names").val(person[1]);
+				$("#niu-sno").val(person[0]);
+				$("#niu-zhuanye").val(person[6]);
+				
+				$("#niu-phone").val(person[14]);
+				$("#niu-notes").val(person[15]);
+			}
+			
+			
+		</script>
+	</body>
+
+</html>

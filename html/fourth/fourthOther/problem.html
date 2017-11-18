@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="format-detection" content="telephone=no">
+		<title>校园课程表--我的常见问题</title>
+		<link rel="stylesheet" href="../../../plugin/seedsui/seedsui.min.css">
+		<link rel="stylesheet" href="../../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../../css/style.css" />
+		<script type="text/javascript" src="../../../js/mui.min.js" ></script>
+		<script type="text/javascript" src="../../../plugin/jquery/jquery.min.js" ></script>
+		<style>
+			table {
+				width: 100%;
+				background: white;
+				color: #A1A1A1;
+				padding: 0px 20px;
+			}
+			table tr {
+				height: 40px;
+			}
+			table tr .odd {
+				text-align: right;
+			}
+			.icon-arrowright{color: #CFCFCF;}
+		</style>
+	</head>
+	<body ontouchstart="">
+		<header>
+			<div class="titlebar reverse">
+				<a class="titlebar-button button size32  left" href="javascript:history.go(-1)">
+					<i class="icon icon-arrowleft size20"></i>
+				</a>
+				<h1 class="text-center">常见问题</h1>
+			</div>
+		</header>
+
+		<article style="background: white;">
+			<div style="height:12px;background-color:#f4f4f4"></div>
+			<div style="border-top:1px solid #ddd;">
+				<ul class="list app-userMenuList">
+					<li class="one">
+						<i class="icon icon-rdoinfo color-9"></i>
+						<div>
+							<p>绑定不了校园卡</p>
+							<i class="icon icon-arrowright"></i>
+						</div>
+					</li>
+					<li class="two">
+						<i class="icon icon-rdoinfo color-9"></i>
+						<div>
+							<p>成绩不存在</p>
+							<i class="icon icon-arrowright"></i>
+						</div>
+					</li>
+					<li class="three">
+						<i class="icon icon-rdoinfo color-9"></i>
+						<div>
+							<p>学号是什么</p>
+							<i class="icon icon-arrowright"></i>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</article>
+	</body>
+		<script>
+		$(".list .one").on("click",function(){
+			location.href="../static/prbDetail1.html";
+		});
+		$(".list .two").on("click",function(){
+			location.href="../static/prbDetail2.html";
+		});
+		$(".list .three").on("click",function(){
+			location.href="../static/prbDetail3.html";
+		});
+	</script>
+</html>

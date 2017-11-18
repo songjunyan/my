@@ -1,0 +1,122 @@
+﻿
+
+
+/*内容*/
+
+article {
+	background-color: none;
+}
+
+
+/*底部*/
+
+.menubar a {
+	float: left;
+	width: 25%;
+	box-sizing: border-box;
+}
+
+footer ul {
+	background: white;
+}
+
+
+/*表格*/
+
+table.altrowstable {
+	color: #666666;
+	width: 100%;
+	border-width: 1px;
+	border-color: #D9D9D9;
+	border-collapse: collapse;
+}
+
+table.altrowstable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #D9D9D9;
+}
+
+table.altrowstable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #D9D9D9;
+}
+
+.oddrowcolor {
+	background-color: #d4e3e5;
+}
+
+.evenrowcolor {
+	background-color: #c3dde0;
+}
+
+
+/*列*/
+
+.app-userMenuList li {
+	-webkit-box-align: center;
+}
+
+.app-userMenuList li div {
+	display: -webkit-box;
+	-webkit-box-flex: 1;
+	-webkit-box-align: center;
+	height: 50px;
+	border-bottom: 1px solid #ddd;
+}
+
+.app-userMenuList li p {
+	-webkit-box-flex: 1;
+}
+
+.app-userMenuList li i:nth-of-type(1) {
+	margin: 0 8px;
+}
+
+.app-userMenuList li i:last-child {
+	width: 12px;
+	height: 12px;
+	font-size: 12px;
+	color: #aaaaaa;
+	margin: 8px;
+}
+
+.app-metro {
+	padding: 0px;
+	border-bottom: 1px solid #D9D9D9;
+}
+
+.app-metro:after {
+	display: table;
+	content: '';
+	clear: both;
+	zoom: 1;
+}
+
+.app-metro .sticker {
+	top: 2px;
+	left: 2px;
+}
+
+.app-metro-cell {
+	position: relative;
+	float: left;
+	box-sizing: border-box;
+	padding: 0px;
+}
+
+.app-metro-cell .cont {
+	margin: 5px;
+	font-size: 8px;
+	color: white
+}
+
+.app-metro-cell-inner {
+	width: 100%;
+	text-align: center;
+	padding: 8px 0;
+	box-sizing: border-box;
+}

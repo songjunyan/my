@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="format-detection" content="telephone=no">
+		<title>校园课程表--课表</title>
+		<link rel="stylesheet" href="../../plugin/seedsui/seedsui.min.css">
+		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<script type="text/javascript" src="../../plugin/jquery/jquery.min.js" ></script>
+		<script type="text/javascript" src="../../js/mui.min.js" ></script>
+		<script type="text/javascript" src="../../js/jsoup.js" ></script>
+		<style>
+			.sd {
+				padding: 30px 0px;
+			}
+			body {
+				background-image: url(../../img/bg2.jpg);
+				background-size: cover;
+				background-repeat: no-repeat;
+				background-position: center center;
+				background-attachment: fixed;
+			}
+			.app-metro .ss {
+				width: 13%;
+				border-radius: 10px;
+			}
+			.app-metro .ss a p{color: white;padding: 2px;font-size: 14px;}
+			
+		</style>
+	</head>
+
+	<body>
+		<header style="background: #D2E1F5;">
+			<div class="titlebar reverse">
+				<h1 style="margin-left: 20px;">课程表</h1>
+				<span style="margin-right: 20px; font-size: 14px;color: #FFFFFF;">
+					 <span class="mui-icon mui-icon-loop" data-loading-text=" " data-loading-icon-position="right"></span>
+				</span>
+			</div>
+			<div class="app-metro" style="border: 1px solid #D9D9D9;">
+				<div class="app-metro-cell" style="width:9%;">
+					<a class="app-metro-cell-inner ">
+					</a>
+				</div>
+				<div class="app-metro-cell" style="width:13%;">
+					<a class="app-metro-cell-inner ">
+						<span>周一</span>
+					</a>
+				</div>
+				<div class="app-metro-cell" style="width:13%;">
+					<a class="app-metro-cell-inner ">
+						<span>周二</span>
+					</a>
+				</div>
+				<div class="app-metro-cell" style="width:13%;">
+					<a class="app-metro-cell-inner ">
+						<span>周三</span>
+					</a>
+				</div>
+				<div class="app-metro-cell" style="width:13%;">
+					<a class="app-metro-cell-inner ">
+						<span>周四</span>
+					</a>
+				</div>
+				<div class="app-metro-cell" style="width:13%;">
+					<a class="app-metro-cell-inner ">
+						<span>周五</span>
+					</a>
+				</div>
+				<div class="app-metro-cell" style="width:13%;">
+					<a class="app-metro-cell-inner ">
+						<span>周六</span>
+					</a>
+				</div>
+				<div class="app-metro-cell" style="width:13%;">
+					<a class="app-metro-cell-inner">
+						<span>周日</span>
+					</a>
+				</div>
+			</div>
+		</header>
+
+
+		<article class="bg" style="margin-top:35px;" id="niu-kechengbiao">
+			<div class="app-metro tables" >
+				<div class="app-metro-cell" style="width:9%;border-right: 1px solid #D9D9D9;">
+					<a class="app-metro-cell-inner sd">
+						<span>1</span>
+					</a>
+				</div>
+			</div>
+			<div class="app-metro tables" >
+				<div class="app-metro-cell" style="width:9%;border-right: 1px solid #D9D9D9;">
+					<a class="app-metro-cell-inner sd">
+						<span>2</span>
+					</a>
+				</div>
+			</div>
+			<div class="app-metro tables" >
+				<div class="app-metro-cell" style="width:9%;border-right: 1px solid #D9D9D9;">
+					<a class="app-metro-cell-inner sd">
+						<span>3</span>
+					</a>
+				</div>
+			</div>
+			<div class="app-metro tables" >
+				<div class="app-metro-cell" style="width:9%;border-right: 1px solid #D9D9D9;">
+					<a class="app-metro-cell-inner sd">
+						<span>4</span>
+					</a>
+				</div>
+			</div>
+			<div class="app-metro tables" >
+				<div class="app-metro-cell" style="width:9%;border-right: 1px solid #D9D9D9;">
+					<a class="app-metro-cell-inner sd">
+						<span>5</span>
+					</a>
+				</div>
+			</div>
+		</article>
+		
+		
+		
+		<footer id="dibu">
+			<ul class="menubar">
+				<li class="tab">
+					<i class="icon icon-home-fill"></i>
+					<label class="tab-label">首页</label>
+				</li>
+				<li class="tab ">
+					<i class="icon icon-paperplane-fill"></i>
+					<label class="tab-label" onclick="">消息</label>
+				</li>
+				<li class="tab active">
+					<i class="icon icon-typetext-fill"></i>
+					<label class="tab-label">课程表</label>
+				</li>
+				<li class="tab">
+					<i class="icon icon-person-fill"></i>
+					<label class="tab-label">我的</label>
+				</li>
+			</ul>
+		</footer>
+		
+		
+		<script type="text/javascript">
+			var info = new echoSlide();
+			var ip=info.getIpAddress();
+			
+			
+			info.InitCourseInfo($("#niu-kechengbiao"));
+			
+			mui(document.body).on('tap', '.mui-icon', function(e) {
+           		mui(this).button('loading');
+           		$(this).removeClass("mui-icon mui-icon-loop");
+            	setTimeout(function() {
+               		 mui(this).button('reset');
+               		 $(this).addClass("mui-icon mui-icon-loop");
+               		 info.InitCourseInfo($("#niu-kechengbiao"));
+               		 mui.toast('已经是最新数据',{duration:'short', type:'div'});
+            	}.bind(this), 10000);
+            	
+            	var myurl = "http://"+ip+":8080/SecondApp/CourseServer";
+				var myDate={username:JSON.parse(localStorage.getItem("us")),password:JSON.parse(localStorage.getItem("ps")),id:JSON.parse(localStorage.getItem("userid"))};
+				info.getCourseInfo(myurl,myDate);
+        	});
+			
+			//底部导航
+			$("#dibu li").on("click",function(){
+				switch($(this).index()){
+					case 0:
+						location.href="../first/first.html";
+					break;
+					case 1:
+						location.href="../second/second.html";
+					break;
+					case 3:
+						location.href="../fourth/fourth.html";
+					break;
+				}
+			});
+			
+			
+			
+		</script>
+		
+	</body>
+
+</html>

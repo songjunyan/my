@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="format-detection" content="telephone=no">
+		<title>校园课程表--校园卡常见问题</title>
+		<link rel="stylesheet" href="../../../../plugin/seedsui/seedsui.min.css">
+		<link rel="stylesheet" href="../../../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../../../css/style.css" />
+		<script type="text/javascript" src="../../../../js/mui.min.js" ></script>
+		<style>
+			table {
+				width: 100%;
+				background: white;
+				color: #A1A1A1;
+				padding: 0px 20px;
+			}
+			table tr {
+				height: 40px;
+			}
+			table tr .odd {
+				text-align: right;
+			}
+			.icon-arrowright{color: #CFCFCF;}
+		</style>
+	</head>
+	<body ontouchstart="">
+		<header>
+			<div class="titlebar reverse">
+				<a class="titlebar-button button size32  left" href="javascript:history.go(-1)">
+					<i class="icon icon-arrowleft size20"></i>
+				</a>
+				<h1 class="text-center">常见问题</h1>
+			</div>
+		</header>
+
+		<article style="background: white;">
+			<div style="border-top:1px solid #ddd;">
+				<ul class="list app-userMenuList">
+					<li class="one">
+						<i class="icon icon-rdoquestion color-default"></i>
+						<div>
+							<p>校园卡如何领款</p>
+							<i class="icon icon-arrowright"></i>
+						</div>
+					</li>
+					<li class="two">
+						<i class="icon icon-rdoquestion color-default"></i>
+						<div>
+							<p>余额不一致</p>
+							<i class="icon icon-arrowright"></i>
+						</div>
+					</li>
+					<li class="three">
+						<i class="icon icon-rdoquestion color-default"></i>
+						<div>
+							<p>付款成功未领款</p>
+							<i class="icon icon-arrowright"></i>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</article>
+	</body>
+	<script type="text/javascript" src="../../../../plugin/jquery/jquery.min.js" ></script>
+	<script>
+		$(".app-userMenuList .one").on("click",function(){
+			location.href="../../static/position.html";
+		});
+		$(".app-userMenuList .two").on("click",function(){
+			location.href="../../static/pst.html";
+		});
+		$(".app-userMenuList .three").on("click",function(){
+			location.href="../../static/pst2.html";
+		});
+	</script>
+</html>

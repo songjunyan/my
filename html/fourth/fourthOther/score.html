@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="format-detection" content="telephone=no">
+		<title>校园课程表--我的成绩</title>
+		<link rel="stylesheet" href="../../../plugin/seedsui/seedsui.min.css">
+		<link rel="stylesheet" href="../../../css/style.css" />
+		<link rel="stylesheet" href="../../../css/mui.min.css" />
+		<script type="text/javascript" src="../../../plugin/seedsui/seedsui.min.js"></script>
+		<script type="text/javascript" src="../../../js/mui.min.js" ></script>
+		<script type="text/javascript" src="../../../js/jquery.min.js" ></script>
+		<script type="text/javascript" src="../../../js/jsoup.js" ></script>
+		<style>
+			.inputbox-left {
+				width: 18%;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="bg-primary tbpadding8">
+				<ul class="tabbar reverse" data-type="rect" id="ID-Tabbar" style="width:50%;">
+					<li class="tab active">
+						<label class="tab-label">春季</label>
+					</li>
+					<li class="tab">
+						<label class="tab-label">秋季</label>
+					</li>
+				</ul>
+				<div style="position: absolute;z-index:10;background:none;top:12px;right:0px;">
+					<span style="margin-right: 30px; font-size: 14px;color: #FFFFFF;">
+					 	<span class="mui-icon mui-icon-loop" data-loading-text=" " data-loading-icon-position="right"></span>
+					</span>
+				</div>
+			</div>
+		</header>
+			
+			
+		<article class="scrollbox">
+			<div class="slider-container" id="ID-CarouselPage" style="height: 100%;">
+				<div class="slider-wrapper" >
+					<div class="slider-slide">
+						<!--第一页:start-->
+						<img src="../../../img/summer.jpg" style="width: 100%;height: auto;" />
+						<table class="altrowstable" id="scoredSummer">
+							<tr>
+								<td>课程名</td>
+								<td>成绩</td>
+								<td>学分</td>
+							</tr>
+							<tr>
+								<td>Java高级程序设计</td>
+								<td>90</td>
+								<td>4.0</td>
+							</tr>
+							<tr>
+								<td>Java高级程序设计</td>
+								<td>90</td>
+								<td>4.0</td>
+							</tr>
+							<tr>
+								<td>Java高级程序设计</td>
+								<td>90</td>
+								<td>4.0</td>
+							</tr>
+						</table>
+					</div>
+					<div class="slider-slide" >
+						<!--第二页:start-->
+						<img src="../../../img/winter.jpg" style="width: 100%;height: auto;" />
+						<table class="altrowstable" id="scoredWinter">
+							<tr>
+								<td>课程名</td>
+								<td>成绩</td>
+								<td>学分</td>
+							</tr>
+							<tr>
+								<td>Java高级程序设计</td>
+								<td>90</td>
+								<td>4.0</td>
+							</tr>
+							<tr>
+								<td>Java高级程序设计</td>
+								<td>90</td>
+								<td>4.0</td>
+							</tr>
+							<tr>
+								<td>Java高级程序设计</td>
+								<td>90</td>
+								<td>4.0</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			
+			<script>
+				var info = new echoSlide();
+				var ip=info.getIpAddress();
+				
+				
+				info.scoredInfoAll($("#scoredSummer"),$("#scoredWinter"));
+				
+				//刷新
+				mui(document.body).on('tap', '.mui-icon', function(e) {
+           			mui(this).button('loading');
+           			$(this).removeClass("mui-icon mui-icon-loop");
+            		setTimeout(function() {
+               		 	mui(this).button('reset');
+               		 	$(this).addClass("mui-icon mui-icon-loop");
+               		 	info.scoredInfoAll($("#scoredSummer"),$("#scoredWinter"));
+               		 	mui.toast('成绩已经最新',{duration:'short', type:'div'});
+            		}.bind(this), 7000);
+            		
+            		//成绩初始化
+					var myurl = "http://"+ip+":8080/SecondApp/AchievermentServer";
+					var myDate={username:JSON.parse(localStorage.getItem("us")),password:JSON.parse(localStorage.getItem("ps")),id:JSON.parse(localStorage.getItem("userid"))};
+					info.InitAchieve(myurl,myDate);
+        		});
+			
+			
+			
+				var view = {
+					initialize: function() {
+						this.slides = document.querySelectorAll("#ID-CarouselPage .slider-slide");
+						this.tabbar = document.getElementById("ID-Tabbar");
+						this.tabs = this.tabbar.querySelectorAll(".tab");
+						this.carouselPage = {};
+						this.render();
+					},
+					render: function() {
+						this._initPlugin();
+					},
+					_tabActive: function(index) {
+						for(var i = 0, t; t = this.tabs[i++];) {
+							t.classList.remove("active");
+						}
+						this.tabs[index].classList.add("active");
+					},
+					_initData: function() {
+						var self = this;
+						var pageDataCount = [100, 10, 30, 40, 50]; //每页数据条数
+						[].slice.call(self.slides).forEach(function(n, i, a) {
+							var datastr = "";
+						})
+					},
+					_initTabbar: function() {
+						var self = this;
+						for(var i = 0, t; t = this.tabs[i++];) {
+							(function(i) {
+								t.addEventListener("click", function() {
+									self.carouselPage.slideTo(i - 1);
+									self._tabActive(i - 1);
+								}, false);
+							})(i);
+						}
+					},
+					_initSlider: function() {
+						var self = this;
+						this.carouselPage = new Slider("#ID-CarouselPage", {
+							"onInit": function(e) {
+								//compatibleIosScroll(e);
+							},
+							"onSlideChangeEnd": function(e) {
+								self._tabActive(e.index);
+								//compatibleIosScroll(e);
+							}
+						});
+					},
+					_initPlugin: function() {
+						this._initData();
+						this._initSlider();
+						this._initTabbar();
+					},
+				}
+
+				window.addEventListener("load", function() {
+					view.initialize();
+				}, false);
+
+				//下拉
+				
+				
+				
+				
+				
+			
+				
+		</script>
+	</body>
+</html>
